@@ -40,4 +40,18 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateUser(id,user);
 	}
 
+	@Override
+	public String deleteUser(long id) {
+		// TODO Auto-generated method stub
+		return userDao.deleteUser(id);
+	}
+
+	@Override
+	public boolean login(String username, String password) {
+		// TODO Auto-generated method stub
+		return userDao.login(username,password);
+	}
+
+	
+
 }

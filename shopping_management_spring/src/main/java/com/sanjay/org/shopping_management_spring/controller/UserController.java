@@ -1,6 +1,5 @@
 package com.sanjay.org.shopping_management_spring.controller;
 
-import com.sanjay.org.shopping_management_spring.queries.ShoppingQueries;
 import com.sanjay.org.shopping_management_spring.service.UserService;
 
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sanjay.org.shopping_management_spring.model.User;
 
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin(origins ="*")
 @RestController
 public class UserController {
 	@Autowired
@@ -57,6 +57,18 @@ public class UserController {
 		
 	}
 	
+	@DeleteMapping("user/delete/{id}")
+	public String deleteUser(@PathVariable("id") long id)
+	{
+		return userService.deleteUser(id);
+		
+	}
+	
+	@PostMapping("/login")
+	public boolean login(@RequestBody User user)
+	{
+		return userService.login(user.getUserEmail(),user.getUserPassword());
+	}
 }
 	
 

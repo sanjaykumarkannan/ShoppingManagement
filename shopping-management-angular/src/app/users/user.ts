@@ -2,6 +2,7 @@ export class User
 {   
     userId:number;
     userName:string='';
-    userDOB:String;
+    userEmail:string='';
+    userDOB:Date;
     userPassword:string='';
 }
