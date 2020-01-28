@@ -13,6 +13,11 @@ public interface UserService {
 	ArrayList<User> getAllUsers();
 
 	User updateUser(long id, User user);
+
+	String deleteUser(long id);
+
+	boolean login(String username, String password);
+
 	
 	
 

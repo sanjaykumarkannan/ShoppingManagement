@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -25,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public String insertUser(User user) {
 		// TODO Auto-generated method stub
-		Object[] args = new Object[] {user.getUserName(),user.getUserId(),user.getUserPassword()};
+		Object[] args = new Object[] {user.getUserName(),user.getUserEmail(),user.getUserPassword(),user.getUserDOB()};
 		
 		int out = jdbcTemplate.update(ShoppingQueries.INSERT_NEW_USER, args);
 		
@@ -68,6 +70,7 @@ public class UserDaoImpl implements UserDao {
 			addUser.setUserId(Integer.parseInt(String.valueOf(user.get("id"))));
 			addUser.setUserName(String.valueOf(user.get("name")));
 			addUser.setUserDOB((Date)user.get("dob"));
+			addUser.setUserPassword(String.valueOf(user.get("password")));
 			users.add(addUser);
 		}
 		return users;
@@ -81,6 +84,63 @@ public class UserDaoImpl implements UserDao {
 		System.out.println(update);
 		return user;
 	}
+
+	@Override
+	public String deleteUser(long id) {
+		// TODO Auto-generated method stub
+		int delete=jdbcTemplate.update(ShoppingQueries.DELETE_USER,id);
+		System.out.println(delete);
+		if(delete!=0)
+		{
+			return "Deleted!";
+		}
+		else
+		{
+			return "No record found in table to delete";
+		}
+		
+	}
+
+	@Override
+	public boolean login(String username, String password) {
+		// TODO Auto-generated method stub
+		boolean validUser=false;
+		System.out.println(username+" "+password);
+		
+		int count;
+		Map<String, Object> countMap=jdbcTemplate.queryForMap(ShoppingQueries.CHECK_USER_EXIST, new Object[] {username});
+		count=Integer.parseInt(String.valueOf(countMap.get("count")));
+		
+		
+		if(count==1)
+		{
+			User user = jdbcTemplate.queryForObject(ShoppingQueries.GET_USER_CREDS, new Object[]{username}, new RowMapper<User>(){
+	
+				@Override
+				public User mapRow(ResultSet rs, int rowNum) throws SQLException
+				{
+					User user=new User();
+					
+					user.setUserEmail(rs.getString("email"));
+					user.setUserPassword(rs.getString("password"));
+					return user;
+				
+				}});
+			System.out.println(user.getUserEmail()+" + "+user.getUserPassword());
+			if(password.equals(user.getUserPassword()))
+			{
+				validUser=true;
+				System.out.println(validUser);
+
+				return validUser;
+			}
+		}
+		
+		return validUser;
+	}
+
+	
+
 		
 
 

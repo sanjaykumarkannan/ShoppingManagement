@@ -2,15 +2,17 @@ package com.sanjay.org.shopping_management_spring.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class User {
 
 	private String userName;
-	
+	//JSON Date format 1997-01-21T04:30:00.500Z
 	private Date userDOB;
 	private int userId;
 	private String userPassword;
+	private String userEmail;
+	
+	
 	
 	public String getUserName() {
 		return userName;
@@ -35,6 +37,12 @@ public class User {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	
 	
