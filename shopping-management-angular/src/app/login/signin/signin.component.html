@@ -1,0 +1,16 @@
+<div class="container-fluid">
+        <h2 class="text-center">Login</h2>
+    <form action="">
+        <div class="form-group">
+            <label for="userName">Email:</label>
+            <input type="text" [(ngModel)]="user.userEmail" placeholder="Email" name="userEmail" class="form-control" id="userEmail">
+        </div>
+
+        <div class="form-group">
+                <label for="userName">Password:</label>
+                <input type="password" [(ngModel)]="user.userPassword" placeholder="Password" name="userPassword" class="form-control" id="userPassword">
+            </div>
+
+        <button class="btn btn-success" (click)="login()">Signin</button>
+    </form>
+</div>
