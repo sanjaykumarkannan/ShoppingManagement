@@ -1,0 +1,17 @@
+Create multiple angular comp at once
+
+for i in header footer;do ng g c "${i}"; done
+
+objectmodel.js.org for type error
+
+Compiling TYPESCRIPT
+tsc filename.ts
+
+then
+
+node filename.js
+
+Companies
+Experience working with various notification API suites (Twilio, Open Market)
+
+hihi

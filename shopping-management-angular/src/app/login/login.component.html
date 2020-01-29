@@ -1,0 +1,28 @@
+
+<div class="container-fluid col-md-6 login">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+              <div class="container-fluid"><li class="nav-item active" >
+                  <button class="nav-link" (click)="signup()">Signup</button>               
+              </li></div>
+            
+            <div class="container-fluid">
+                <li class="nav-item">
+                    <!-- <a  class="nav-link" href="/login/signin">Signin</a> -->
+                    <button class="nav-link" (click)="signin()">Signin</button>
+                      
+                  </li>
+            </div>
+            
+          
+          </ul>
+        </div>
+      </nav>
+      
+          <app-signup *ngIf="signup_comp"></app-signup>
+          <app-signin *ngIf="signin_comp"></app-signin>
+      
+      
+</div>
