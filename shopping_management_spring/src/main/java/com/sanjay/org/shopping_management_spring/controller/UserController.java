@@ -8,6 +8,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,9 +47,10 @@ public class UserController {
 	
 	
 	@PostMapping("/user/add")
-	public String insertUser(@RequestBody User user) {
+	public ResponseEntity<String> insertUser(@RequestBody User user) {
 		//String query = "insert into users (name) values (?)";
-		return userService.insertUser(user);
+		
+		return new ResponseEntity<>(userService.insertUser(user), HttpStatus.OK);
 	}
 	
 	@PutMapping("/user/update/{id}")

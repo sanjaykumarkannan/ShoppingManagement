@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClientService } from '../service/http-client.service';
+import { AuthenticationService } from '../service/authentication.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { HttpClientService } from '../service/http-client.service';
 export class HeaderComponent implements OnInit {
   @Input()
   loggedIn:boolean =false;
-  constructor(private httpsService:HttpClientService) { }
+  constructor(private httpsService:HttpClientService,private logoutService:AuthenticationService) { }
 
 
   ngOnInit() {
@@ -22,6 +23,12 @@ export class HeaderComponent implements OnInit {
 {
   console.log("Error while logging in");
 })
+  };
+
+  logout()
+  {
+    this.loggedIn=false;
+    this.logoutService.logOut();
   }
 
 }

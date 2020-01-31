@@ -13,6 +13,14 @@ export class UsersComponent implements OnInit {
   constructor(private httpService:HttpClientService) { }
 
   ngOnInit() {
+//     this.httpService.loginStatusObservable.subscribe((data)=>
+//   {
+//     console.log(data);
+//   },
+// (error)=>
+// {
+//   console.log("Error while logging in");
+// })
     this.getAllUsers();
   }
 
@@ -25,7 +33,7 @@ export class UsersComponent implements OnInit {
       console.log(this.users)
     },
     (error)=>{
-      console.log(error)
+      console.log(error)  
     } 
   )
   }
