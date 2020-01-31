@@ -18,6 +18,9 @@ import org.springframework.stereotype.Repository;
 import com.sanjay.org.shopping_management_spring.model.User;
 import com.sanjay.org.shopping_management_spring.queries.ShoppingQueries;
 
+
+
+
 @Repository
 public class UserDaoImpl implements UserDao {
 	
@@ -28,11 +31,13 @@ public class UserDaoImpl implements UserDao {
 	public String insertUser(User user) {
 		// TODO Auto-generated method stub
 		Object[] args = new Object[] {user.getUserName(),user.getUserEmail(),user.getUserPassword(),user.getUserDOB()};
-		
-		int out = jdbcTemplate.update(ShoppingQueries.INSERT_NEW_USER, args);
-		
+		int out=0;
+		System.out.println("Out is B"+out);
+		out = jdbcTemplate.update(ShoppingQueries.INSERT_NEW_USER, args);
+		System.out.println("Out is "+out);
 		if(out !=0){
-			return "Employee saved ";
+			
+			return "Employee saved";
 		}
 		else
 			return "Employee save failed ";

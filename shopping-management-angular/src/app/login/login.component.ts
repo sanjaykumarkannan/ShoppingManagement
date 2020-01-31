@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   signin_comp:boolean;
   constructor() {
     console.log("Login COmponent");
-    this.signup_comp=true;
-    this.signin_comp=false;
+    this.signup_comp=false;
+    this.signin_comp=true;
    }
 
   ngOnInit() {
