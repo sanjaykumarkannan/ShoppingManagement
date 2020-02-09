@@ -2,6 +2,7 @@ package com.sanjay.org.shopping_management_spring.service;
 
 import java.util.ArrayList;
 
+import com.sanjay.org.shopping_management_spring.model.ImageModel;
 import com.sanjay.org.shopping_management_spring.model.User;
 
 public interface UserService {
@@ -10,7 +11,7 @@ public interface UserService {
 
 	 User getUser(long id);
 
-	ArrayList<User> getAllUsers();
+	ArrayList<ImageModel> getAllFiles(String userEmail);
 
 	User updateUser(long id, User user);
 

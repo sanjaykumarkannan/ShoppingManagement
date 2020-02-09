@@ -5,19 +5,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
-        <li *ngIf="!loggedIn" class="nav-item active">
+        <li *ngIf="!loginStatus.isUserLoggedIn()" class="nav-item active">
             <a class="nav-link" href="/login">Login</a>
         </li>
-        <li *ngIf="loggedIn" class="nav-item ">
+        <li *ngIf="loginStatus.isUserLoggedIn()" class="nav-item ">
           <a  class="nav-link" href="/viewFiles">My Files <span class="sr-only">(current)</span></a>
         </li>
-        <li *ngIf="loggedIn" class="nav-item">
-          <a class="nav-link" href="#">Upload</a>
+        <li *ngIf="loginStatus.isUserLoggedIn()" class="nav-item">
+          <a class="nav-link" href="/upload">Upload</a>
         </li>
-        <li *ngIf="loggedIn" class="nav-item">
+        <li *ngIf="loginStatus.isUserLoggedIn()" class="nav-item">
           <a class="nav-link" href="#">Buy</a>
         </li>
-        <li *ngIf="loggedIn" class="nav-item">
+        <li *ngIf="loginStatus.isUserLoggedIn()" class="nav-item">
             <a class="nav-link" href="/" (click)="logout()">Logout</a>
           </li>
         <!-- <li class="nav-item dropdown">
