@@ -11,24 +11,25 @@ import { AuthenticationService } from '../service/authentication.service';
 export class HeaderComponent implements OnInit {
   @Input()
   loggedIn:boolean =false;
-  constructor(private httpsService:HttpClientService,private logoutService:AuthenticationService) { }
+  constructor(private httpsService:HttpClientService,private loginStatus:AuthenticationService) { }
 
 
   ngOnInit() {
-    this.httpsService.loginStatusObservable.subscribe((data)=>
+    //Behaviour subject code
+    /* this.httpsService.loginStatusObservable.subscribe((data)=>
   {
     this.loggedIn=data;
   },
 (error)=>
 {
   console.log("Error while logging in");
-})
+}) */
   };
-
+//loginStatus.isUserLoggedIn
   logout()
   {
     this.loggedIn=false;
-    this.logoutService.logOut();
+    this.loginStatus.logOut();
   }
 
 }

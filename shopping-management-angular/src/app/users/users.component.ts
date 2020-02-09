@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { HttpClientService } from '../service/http-client.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-users',
@@ -9,7 +10,8 @@ import { HttpClientService } from '../service/http-client.service';
 })
 export class UsersComponent implements OnInit {
 
-  users:User[];
+  products:Product[];
+  
   constructor(private httpService:HttpClientService) { }
 
   ngOnInit() {
@@ -21,16 +23,16 @@ export class UsersComponent implements OnInit {
 // {
 //   console.log("Error while logging in");
 // })
-    this.getAllUsers();
+    this.getAllFiles();
   }
 
-  getAllUsers():void
+  getAllFiles():void
   {
-    this.httpService.getAllUsers().subscribe(
-      (userData:User[])=>
+    this.httpService.getAllFiles().subscribe(
+      (productData:Product[])=>
     {
-      this.users=userData,
-      console.log(this.users)
+      this.products=productData,
+      console.log(this.products)
     },
     (error)=>{
       console.log(error)  
@@ -38,4 +40,14 @@ export class UsersComponent implements OnInit {
   )
   }
 
+  viewCardInfo (product:Product)
+  {
+    console.log(product);
+  }
+
+  //Deleting a product
+  deleteProduct(product:Product)
+  {
+    this.httpService.deleteProduct(product);
+  }
 }

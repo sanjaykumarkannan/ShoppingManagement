@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.sanjay.org.shopping_management_spring.model.ImageModel;
 import com.sanjay.org.shopping_management_spring.model.User;
 import com.sanjay.org.shopping_management_spring.queries.ShoppingQueries;
 
@@ -64,19 +65,27 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public ArrayList<User> getAllUsers() {
+	public ArrayList<ImageModel> getAllFiles(String userEmail) {
 		// TODO Auto-generated method stub
-		ArrayList<User> users=new ArrayList<User>();
-		List<Map<String, Object>> userList= jdbcTemplate.queryForList(ShoppingQueries.GET_ALL_USERS);
+		ArrayList<ImageModel> users=new ArrayList<ImageModel>();
+		List<Map<String, Object>> userList= jdbcTemplate.queryForList(ShoppingQueries.GET_ALL_FILES,new Object[] {userEmail});
 		
 		for(Map<String,Object> user:userList)
 		{
-			User addUser=new User();
-			addUser.setUserId(Integer.parseInt(String.valueOf(user.get("id"))));
-			addUser.setUserName(String.valueOf(user.get("name")));
-			addUser.setUserDOB((Date)user.get("dob"));
-			addUser.setUserPassword(String.valueOf(user.get("password")));
-			users.add(addUser);
+			/*
+			 * User addUser=new User();
+			 * addUser.setUserId(Integer.parseInt(String.valueOf(user.get("id"))));
+			 * addUser.setUserName(String.valueOf(user.get("name")));
+			 * addUser.setUserDOB((Date)user.get("dob"));
+			 * addUser.setUserPassword(String.valueOf(user.get("password")));
+			 * users.add(addUser);
+			 */
+			
+			ImageModel addProduct = new ImageModel();
+			addProduct.setProductid(Long.parseLong(String.valueOf(user.get("productid"))));
+			addProduct.setName(String.valueOf(user.get("name")));
+			addProduct.setType(String.valueOf("type"));
+			users.add(addProduct);
 		}
 		return users;
 	}

@@ -4,6 +4,8 @@ import { User } from '../users/user';
 import { catchError } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '../../../node_modules/@angular/router';
+import { Product } from '../models/product';
+import { Options } from '../../../node_modules/@types/selenium-webdriver/chrome';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,8 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient,private router:Router) { }
 
-  getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>("http://localhost:8501/user/get/all")
+  getAllFiles (): Observable<Product[]> {
+    return this.httpClient.post<Product[]>("http://localhost:8501/user/get/all",sessionStorage.getItem("userEmail"))
       .pipe(
         catchError(this.handleError)
       );
@@ -39,8 +41,8 @@ export class HttpClientService {
       {
         console.log(data);
         
-          sessionStorage.setItem('username', user.userEmail);
-          this.router.navigate(['upload']);
+          sessionStorage.setItem('userEmail', user.userEmail);
+            
       }
       else{
         console.log("Validation failed");
@@ -63,6 +65,30 @@ export class HttpClientService {
         console.log(error);
       }
       );
+  }
+
+  //Delete a single product
+  deleteProduct(product:Product)
+  { 
+    var requestOptions: Object = {
+    responseType: 'text'
+  }
+    console.log(product.productid);
+    this.httpClient.delete<String>("http://localhost:8501/user/delete/"+product.productid,requestOptions).subscribe(
+      data=>{
+        console.log(data);
+         //window.location.reload();
+         //The below code is used to refresh a particular component alone 
+         this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/viewFiles']);
+      });
+        
+      },
+      error=>{
+        console.log(error);
+      }
+
+    )
   }
 
 

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.sanjay.org.shopping_management_spring.model.ImageModel;
 import com.sanjay.org.shopping_management_spring.model.User;
 
 @CrossOrigin(origins ="*")
@@ -37,11 +37,11 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/user/get/all")
-	public ArrayList<User> getAllUsers()
+	@PostMapping("/user/get/all")
+	public ArrayList<ImageModel> getAllFiles(@RequestBody String userEmail)
 	{
 		
-		return userService.getAllUsers();
+		return userService.getAllFiles(userEmail);
 		
 	}
 	
@@ -61,8 +61,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping("user/delete/{id}")
-	public String deleteUser(@PathVariable("id") long id)
+	public String deleteUser(@PathVariable("id") Long id)
 	{
+		System.out.println(id.getClass().getName());
 		return userService.deleteUser(id);
 		
 	}

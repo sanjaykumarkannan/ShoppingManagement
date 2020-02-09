@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sanjay.org.shopping_management_spring.dao.UserDao;
+import com.sanjay.org.shopping_management_spring.model.ImageModel;
 import com.sanjay.org.shopping_management_spring.model.User;
 
 @Service
@@ -29,9 +30,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ArrayList<User> getAllUsers() {
+	public ArrayList<ImageModel> getAllFiles(String userEmail) {
 		// TODO Auto-generated method stub
-		return userDao.getAllUsers();
+		return userDao.getAllFiles(userEmail);
 	}
 
 	@Override

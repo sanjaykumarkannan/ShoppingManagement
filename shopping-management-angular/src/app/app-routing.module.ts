@@ -5,14 +5,16 @@ import { UsersComponent } from './users/users.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { AuthenticationService } from './service/authentication.service';
 
 
 const routes: Routes = [
   {path: 'login',component:LoginComponent},
   {path: 'login/signin',component:SigninComponent},
   {path: 'login/signup',component:SignupComponent},
-  {path:'viewFiles',component:UsersComponent},
-  {path:'upload',component:UploadFileComponent}
+  {path:'viewFiles',component:UsersComponent,canActivate:[AuthenticationService]},
+  {path:'upload',component:UploadFileComponent,canActivate:[AuthenticationService]},
+  {path:'',component:UsersComponent,canActivate:[AuthenticationService]}
 ];
 
 @NgModule({
